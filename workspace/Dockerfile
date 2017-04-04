@@ -388,6 +388,13 @@ RUN if [ ${INSTALL_MC} = true ]; then\
     chmod +x /usr/local/bin/mc \
 ;fi
 
+#####################################
+# mysql-client (for mysqldump)
+#####################################
+USER root
+RUN apt-get update && \
+    apt-get install -y mysql-client
+
 USER laradock
 
 #
