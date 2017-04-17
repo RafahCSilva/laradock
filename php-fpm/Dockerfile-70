@@ -10,7 +10,7 @@
 #    https://hub.docker.com/r/laradock/php-fpm/tags/
 #
 
-FROM laradock/php-fpm:7.0--1.2
+FROM laradock/php-fpm:7.0--1.4
 
 MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 
@@ -243,7 +243,16 @@ RUN if [ ${MSSQL} = true ]; then \
         && ldd lib64/libmsodbcsql-13.0.so.0.0 \
         && ./install.sh install --accept-license \
         && ls -l /opt/microsoft/msodbcsql/ \
-        && odbcinst -q -d -n "ODBC Driver 13 for SQL Server" && \
+        && odbcinst -q -d -n "ODBC Driver 13 for SQL Server" \
+
+    #####################################
+    # Install pdo_dblib
+    #####################################
+
+    && docker-php-ext-install pdo \
+    && docker-php-ext-configure pdo_dblib --with-libdir=/lib/x86_64-linux-gnu \
+    && docker-php-ext-install pdo_dblib \
+    && docker-php-ext-enable pdo_dblib && \
 
     #####################################
     # Install sqlsrv y pdo_sqlsrv
@@ -279,7 +288,7 @@ RUN if [ ${INSTALL_INTL} = true ]; then \
 #####################################
 
 ARG INSTALL_GHOSTSCRIPT=false
-RUN if [ ${GHOSTSCRIPT} = true ]; then \
+RUN if [ ${INSTALL_GHOSTSCRIPT} = true ]; then \
     # Install the ghostscript extension
     # for PDF editing
     apt-get -y update \
@@ -317,7 +326,7 @@ RUN if [ ${INSTALL_WKHTMLTOPDF} = true ]; then \
 ADD ./laravel.ini /usr/local/etc/php/conf.d
 ADD ./laravel.pool.conf /usr/local/etc/php-fpm.d/
 
-RUN rm -r /var/lib/apt/lists/*
+#RUN rm -r /var/lib/apt/lists/*
 
 RUN usermod -u 1000 www-data
 
