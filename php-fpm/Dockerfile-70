@@ -10,7 +10,7 @@
 #    https://hub.docker.com/r/laradock/php-fpm/tags/
 #
 
-FROM laradock/php-fpm:7.0--1.4
+FROM laradock/php-fpm:1.4-v7.0
 
 MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 
@@ -278,7 +278,8 @@ RUN if [ ${MSSQL} = true ]; then \
 ARG INSTALL_INTL=false
 RUN if [ ${INSTALL_INTL} = true ]; then \
     # Install intl and requirements
-    apt-get install -y zlib1g-dev libicu-dev g++ && \
+    apt-get -y update \
+    && apt-get install -y zlib1g-dev libicu-dev g++ && \
     docker-php-ext-configure intl && \
     docker-php-ext-install intl \
 ;fi
