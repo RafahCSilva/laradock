@@ -47,12 +47,6 @@ To update the sidebar or add a new section to it, you can edit this `DOCUMENTATI
 
 > The site will be auto-generated in the `docs/` folder by [Travis CI](https://travis-ci.org/laradock/laradock/).
 
-<<<<<<< HEAD:DOCUMENTATION/_settings/content/contributing/index.md
-1. Install [Hugo](https://gohugo.io/) on your machine (easy thing).
-2. Open the `DOCUMENTATION/_settings/content` and search for the markdown file you want to edit (every folder represents a section in the menu).
-3. Delete the `/docs` folder from the root.
-4. When you finish editing, run the `hugo` command to generate the HTML docs (in the `/docs`).
-=======
 
 
 ### Host the documentation locally
