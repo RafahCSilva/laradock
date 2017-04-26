@@ -333,6 +333,13 @@ RUN if [ ${INSTALL_WKHTMLTOPDF} = true ]; then \
     rm /tmp/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
 ;fi
 
+#####################################
+# Outras necessidades do branch Cadaris:
+#####################################
+
+# Recompile PHP with --enable-calendar laradock/laradock #709
+RUN docker-php-ext-install calendar
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
