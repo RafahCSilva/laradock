@@ -340,6 +340,12 @@ RUN if [ ${INSTALL_WKHTMLTOPDF} = true ]; then \
 # Recompile PHP with --enable-calendar laradock/laradock #709
 RUN docker-php-ext-install calendar
 
+# Exportar para Excel http://www.maatwebsite.nl/laravel-excel/docs/getting-started#requirements
+RUN docker-php-ext-install zip
+RUN apt-get -y install libxml2-dev
+RUN docker-php-ext-install xml
+RUN docker-php-ext-install gd
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
